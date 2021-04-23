@@ -13,7 +13,9 @@ import entites.nutritionist;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -32,6 +34,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
@@ -81,11 +85,16 @@ public class homeController implements Initializable {
  User_Service service = new User_Service();
     nutritionist_Service service_nutrist = new nutritionist_Service();
   User user ;
+  private AutoCompletionBinding<String> autoCompletionBinding;
+    private Set<String> possibleSuggestions ;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+           possibleSuggestions= new HashSet<>(service.get_List_email_users());
+        TextFields.bindAutoCompletion(txt_Seach, service.get_List_email_users());
+     
                   search();
            try {
             refreche();

@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Aymen
+ * @author Aziz
  */
 public class Partie_nutritionistController implements Initializable {
 
@@ -174,7 +174,7 @@ public class Partie_nutritionistController implements Initializable {
       col_sexe.setCellValueFactory(new PropertyValueFactory<>("sexe")); 
          tabview.getItems().clear();       
          // f oudh 1 tbdlha id ta nutrisoniste
-        tabview.setItems(service.Affichertout_nutrisoniste(1));
+        tabview.setItems(service.Affichertout_nutrisoniste(7));
        
     }
 
@@ -242,7 +242,7 @@ public class Partie_nutritionistController implements Initializable {
              if ( info.getProgrammenutrition_id() == 1)
              {
                  // 1 -> maneha dima nutisoniste id teeou 1 baed f login tbdl 1 hasb el id de nutionist
-                 programmenutrition p = new programmenutrition(info.getId(),info.getUser_id() , 1, txt_repas_1.getText(), txt_repas_2.getText(), txt_repas_3.getText(), txt_repas_4.getText(), txt_repas_5.getText(), Integer.valueOf(txt_duree.getText()), txt_jourrepot.getText());
+                 programmenutrition p = new programmenutrition(info.getId(),info.getUser_id() , 7, txt_repas_1.getText(), txt_repas_2.getText(), txt_repas_3.getText(), txt_repas_4.getText(), txt_repas_5.getText(), Integer.valueOf(txt_duree.getText()), txt_jourrepot.getText());
                programmenutrition_Service servi = new programmenutrition_Service();
             
                servi.Ajouter(p);

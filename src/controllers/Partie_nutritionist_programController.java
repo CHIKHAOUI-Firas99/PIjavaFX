@@ -10,7 +10,9 @@ import entites.programmenutrition;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -29,11 +31,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  * FXML Controller class
  *
- * @author Aymen
+ * @author Aziz
  */
 public class Partie_nutritionist_programController implements Initializable {
 
@@ -77,12 +81,16 @@ public class Partie_nutritionist_programController implements Initializable {
     programmenutrition_Service service = new programmenutrition_Service();
     @FXML
     private Button btn_afficher_profile;
-
+ private AutoCompletionBinding<String> autoCompletionBinding;
+       private Set<String> possibleSuggestions ;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+          possibleSuggestions= new HashSet<>(service.get_List_jourrepot_users());
+        TextFields.bindAutoCompletion(txt_Seach, service.get_List_jourrepot_users());
+    
         search();
         try {
             refreche();
@@ -179,7 +187,7 @@ public class Partie_nutritionist_programController implements Initializable {
         col_duree.setCellValueFactory(new PropertyValueFactory<>("duree"));   
         col_jourrepot.setCellValueFactory(new PropertyValueFactory<>("jourrepot"));   
          tabview.getItems().clear();       
-        tabview.setItems(service.Affichertout_nutrisoniste(1));
+        tabview.setItems(service.Affichertout_nutrisoniste(7));
        
     }
 }

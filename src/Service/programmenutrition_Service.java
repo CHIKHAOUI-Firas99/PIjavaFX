@@ -50,7 +50,23 @@ public class programmenutrition_Service implements IService<programmenutrition> 
         }
     
     }
+public ObservableList<String> get_List_jourrepot_users() {
+        ObservableList<String> list = FXCollections.observableArrayList();
 
+        String requete = "select * from programmenutrition ";
+        try {
+            PreparedStatement ps = c.prepareStatement(requete);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                list.add(rs.getString("jourrepot"));
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
     @Override
     public void Supprimer(int id) throws SQLException {
       PreparedStatement ps;
@@ -115,7 +131,7 @@ public class programmenutrition_Service implements IService<programmenutrition> 
         }     
           public ObservableList<programmenutrition> serach(String cas) throws SQLException {
         ObservableList<programmenutrition> list = FXCollections.observableArrayList();
-        String requete = "select * from programmenutrition where ( repas1 LIKE '%" + cas + "%' or repas2 LIKE '%" + cas + "%' or repas3 LIKE '%" + cas + "%' or repas4 LIKE '%" + cas   + "%' or repas5 LIKE '%" + cas + "%' ) ";
+        String requete = "select * from programmenutrition where ( repas1 LIKE '%" + cas + "%' or repas2 LIKE '%" + cas + "%' or repas3 LIKE '%" + cas + "%' or repas4 LIKE '%" + cas   + "%' or jourrepot LIKE '%" + cas + "%' ) ";
         try {
             PreparedStatement ps = c.prepareStatement(requete);
             ResultSet rs = ps.executeQuery();

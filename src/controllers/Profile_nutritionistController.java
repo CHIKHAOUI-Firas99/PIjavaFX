@@ -60,7 +60,7 @@ public class Profile_nutritionistController implements Initializable {
        String list="";
         try {
             for (rate r : service.Affichertout()) {
-                if (r.getId_nutritionist()==4)
+                if (r.getId_nutritionist()==1)
                 {
                    list+="Nom : "+r.getNom()+" Prenom : "+r.getPrenom()+" rate : "+r.getRate();
                 }

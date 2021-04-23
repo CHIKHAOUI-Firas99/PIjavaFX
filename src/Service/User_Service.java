@@ -65,7 +65,23 @@ public class User_Service implements IService<User> {
 
         }
     }
+public ObservableList<String> get_List_email_users() {
+        ObservableList<String> list = FXCollections.observableArrayList();
 
+        String requete = "select * from users ";
+        try {
+            PreparedStatement ps = c.prepareStatement(requete);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                list.add(rs.getString("email"));
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
     @Override
     public void Supprimer(int id) throws SQLException {
         PreparedStatement ps;
