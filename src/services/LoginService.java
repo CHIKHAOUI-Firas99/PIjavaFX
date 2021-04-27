@@ -5,6 +5,7 @@
  */
 package services;
 
+import Alert.AlertDialog;
 import entities.User;
 
 /**
@@ -14,12 +15,16 @@ import entities.User;
 public class LoginService {
      UserService srvUser = new UserService();
         
-     public void check(String username , String password){   
+     public void check(String username , String password){ 
         User p = srvUser.getUserByUsername(username);
-        if(p != null){
-            if(enc.checkPassword(password,p.getPassword())){
-               
-                
+        
+        if(p == null){
+        AlertDialog.showNotification("Error !","vous-devez verifier vos information  ",AlertDialog.image_cross);
+        }        
+        else if(enc.checkPassword(password,p.getPassword()) == false){
+              AlertDialog.showNotification("Error !","vous-devez verifier votre mot de passe ",AlertDialog.image_cross);  
+            }
+        else if(enc.checkPassword(password,p.getPassword())){ 
                UserService.setCurrentUser(p);   
                 if(p.getRoles().toLowerCase().contains("admin"))
                 {
@@ -29,6 +34,9 @@ public class LoginService {
                 {
                     System.out.println("bonjour monsieur le coach "+username);
                 }
+                else if(p.getRoles().toLowerCase().contains("[]")){
+                    System.out.println("ok");
+                }
                 
             }
         }
@@ -36,4 +44,4 @@ public class LoginService {
                     
     
     
-}
+

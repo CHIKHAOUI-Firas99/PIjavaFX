@@ -23,7 +23,7 @@ import utils.MyConnection;
  * @author LENOVO
  */
 public class EntrainementService {
-        
+   
     private Connection c;
     private Statement ste;
     private PreparedStatement pst ;
@@ -62,11 +62,12 @@ public class EntrainementService {
         }
         return arr;
     }
-     public Entrainement getEntrainementByCoachId(int id) throws SQLException {
+     public List<Entrainement> getEntrainementByCoachId(int id) throws SQLException {
         List<Entrainement> arr = new ArrayList<>();
         String req = ("SELECT * FROM Entrainement where coach_id= '" + id + "'");
-        ste = c.createStatement();
+        ste = c.prepareStatement(req);
         ResultSet rs = ste.executeQuery(req);
+       
         while (rs.next()) {
             Entrainement p = new Entrainement();
             p.setId(rs.getInt(1));
@@ -75,10 +76,10 @@ public class EntrainementService {
             p.setJour(rs.getString(4));
             p.setHeure(rs.getInt(5));
             p.setType(rs.getString(6));
-            p.setMeet(rs.getString(7));   
-            return p;
+            p.setMeet(rs.getString(7));  
+            arr.add(p);
         }
-        return null;
+        return arr;
     }
     
     
@@ -109,9 +110,6 @@ public class EntrainementService {
         }
   
     }
-    
-    
-    
-    
+ 
     
 }

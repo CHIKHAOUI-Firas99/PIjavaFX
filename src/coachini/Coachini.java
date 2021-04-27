@@ -27,39 +27,41 @@ public class Coachini {
 
     public static void main(String[] args) throws SQLException {
         
-  
+        
         UserService us = new UserService();
                    
         User u = new User();
 
-        u.setEmail("mortadha@gmail.com");
+        u.setEmail("user@gmail.com");
         u.setRoles("[]");
-        u.setPassword("ahmed");
-        u.setActivation_token("hhhhh");        
-        u.setNom("ahmed");
-        u.setPrenom("heelooo");
+        u.setPassword("azerty123");
+        u.setActivation_token("Activation_token");        
+        u.setNom("user");
+        u.setPrenom("user");
         u.setTel("28606573");
-        u.setDatenaissance(java.sql.Date.valueOf("2013-09-04") );
+        u.setDatenaissance(java.sql.Date.valueOf("1999-09-04") );
         String a = enc.encryptPassword(u.getPassword());
-        u.setPassword(a);
+        //u.setPassword(a);
        //us.ajouterUser(u);
        
        
+          
         //login        
     Scanner myObj = new Scanner(System.in);  // Create a Scanner object
     System.out.println("Enter login");
     String userName = myObj.nextLine();  // Read user input
-    System.out.println("Username is: " + userName);   
-         
+    System.out.println("Username is: " + userName);          
     Scanner myObj2= new Scanner(System.in);  // Create a Scanner object
     System.out.println("Enter password");
     String password = myObj2.nextLine();  // Read user input
     System.out.println("password is: " + password); 
     UserService srvUser = new UserService();      
     LoginService ls = new LoginService();
-    ls.check(userName, password);   
+    ls.check(userName, password);
     
-            
+    }
+    
+     /*       
         if(srvUser.getCurrentUser().getRoles().contains("[\"ROLE_ADMIN\"]")){
         
         UserService uu = new UserService();
@@ -238,21 +240,26 @@ public class Coachini {
          
       }
                  
-                 
+             
      AbonnementService as = new AbonnementService();
      List <Integer> mm = as.readAllAbonnements();  
     
     for(int j=0; j<mm.size(); j+=2)                  
-     System.out.println("le coach qui a l'id "+mm.get(j)+" a "+mm.get(j+1)+" abonnements ");  
+     System.out.println("le coach qui a l'id "+mm.get(j)+" a "+mm.get(j+1)+" abonnements "); 
  
     }
+
+
+    
+    
     
     /*
     requete sql pour récupérer les noms des abonnées:
     SELECT nom FROM abonnement INNER JOIN users ON abonnement.user_id = users.id WHERE coach_id=27
     */
    
-}
+    }
+    
 
 
 

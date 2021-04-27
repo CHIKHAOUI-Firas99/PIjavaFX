@@ -70,7 +70,36 @@ public class CoachService {
         }
   
     }
+    public Coach InfoCoach(int id){
+         try {
+            PreparedStatement pt = con.prepareStatement("SELECT * FROM Coach where user_id = ?");
+            pt.setInt(1, id);
+            ResultSet rs = pt.executeQuery();
+            if(rs.next()){
+                Coach co = new Coach(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3), 
+                        rs.getDouble(4), 
+                        rs.getInt(5), 
+                        rs.getInt(6),
+                        rs.getInt(7), 
+                        rs.getString(8),
+                        rs.getString(9), 
+                        rs.getString(10), 
+                        rs.getString(11), 
+                        rs.getString(12));
+                return co;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+          return null;
     
+    }
+    
+    
+   
       public int getuseridbycoachid(int id) throws SQLException {
            
             PreparedStatement pt= con.prepareStatement("select user_id from Coach WHERE id = ?");

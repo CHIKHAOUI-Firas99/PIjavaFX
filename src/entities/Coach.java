@@ -5,6 +5,9 @@
  */
 package entities;
 
+import java.io.InputStream;
+import java.sql.Blob;
+
 /**
  *
  * @author LENOVO
@@ -140,12 +143,7 @@ public class Coach {
     @Override
     public String toString() {
         return "Coach{" + "id=" + id + ", user_id=" + user_id + ", speciality=" + speciality + ", salary=" + salary + ", age=" + age + ", poid=" + poid + ", hauteur=" + hauteur + ", facebook=" + facebook + ", insta=" + insta + ", gmail=" + gmail + ", bio=" + bio + ", image=" + image + '}';
-    }
-    
-    
-    
-    
-    
+    }   
     
     
 }

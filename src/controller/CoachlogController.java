@@ -5,13 +5,34 @@
  */
 package controller;
 
+import entities.Coach;
 import entities.User;
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import services.AbonnementService;
+import services.CoachService;
 import services.UserService;
 
 /**
@@ -22,17 +43,105 @@ import services.UserService;
 public class CoachlogController implements Initializable {
 
     @FXML
-    private Label text;
+    private Label text,age,poid,bio,hauteur,coachname;
+    
+    @FXML
+    private ImageView Image;
+    @FXML 
+    ListView<String> List_Abb;
+    @FXML
+    private Button planning;
+    @FXML
+    private ImageView image;
 
+  
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try{
+            
         User user = UserService.getCurrentUser();
-        text.setText("Bienvenue coach :"+user.getNom());
+        UserService srvUser = new UserService();
+        if(user.getRoles().contains("[\"ROLE_COACH\"]")){
+        text.setText("Bienvenue coach "+user.getNom());
+        }
+        else {
+        text.setText("Bienvenue "+user.getNom());
+ 
+        }
+        CoachService cch = new CoachService(); 
+        AbonnementService as = new AbonnementService();
+           Coach coach = cch.InfoCoach(srvUser.coachidabb(srvUser.getCurrentUser().getId()));
+           if(user.getRoles().contains("[]")){
+           coachname.setText("vote coach est : "+srvUser.getUserByID(coach.user_id).getNom());
+           }
+           
+        System.out.println(coach.getAge());
+        InputStream stream;
+         stream = new FileInputStream("C:\\wamp\\www\\pi_final\\pi\\public\\uploads\\images\\"+coach.image+"");
+         Image Image = new Image(stream);
+         image.setImage(Image);
+              
+           
+            
+        age.setText(String.valueOf(coach.getAge()));
+        poid.setText(String.valueOf(coach.getPoid()));
+        bio.setText(String.valueOf(coach.getBio()));
+        hauteur.setText(String.valueOf(coach.getHauteur()));
+        List <String> abb = as.Abonnes(coach.getId());
+        System.out.println(abb.size());
+        for(int j=0; j<abb.size(); j+=2)
+        {                 
+        List_Abb.getItems().addAll(abb.get(j));
+        List_Abb.getItems().addAll(abb.get(j+1));
+        }
+        
+        }
+        catch (Exception e){
+            System.out.println (e.getMessage());
+        }
+        
         // TODO
-    }    
+    } 
+    public void planning(ActionEvent event) throws IOException{
+              Parent root = FXMLLoader.load(getClass().getResource("/GUI/CoachPlanning.fxml")); 
+              Scene scene = new Scene(root);
+              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+              stage.setScene(scene);
+              stage.show();
+    }
+    public void profile(ActionEvent event) throws IOException{
+              Parent root = FXMLLoader.load(getClass().getResource("/GUI/coachlog.fxml")); 
+              Scene scene = new Scene(root);
+              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+              stage.setScene(scene);
+              stage.show();
+    }
+    public void md_profile(ActionEvent event) throws IOException{
+              Parent root = FXMLLoader.load(getClass().getResource("/GUI/ProfileEdit.fxml")); 
+              Scene scene = new Scene(root);
+              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+              stage.setScene(scene);
+              stage.show();
+    }   
     
+    public void classement(ActionEvent event) throws IOException{
+        
+              Parent root = FXMLLoader.load(getClass().getResource("/GUI/Classement.fxml")); 
+              Scene scene = new Scene(root);
+              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+              stage.setScene(scene);
+              stage.show();   
+   
+    }
+       public void Accueil(ActionEvent event) throws IOException{          
+              Parent root = FXMLLoader.load(getClass().getResource("/GUI/Accueil.fxml")); 
+              Scene scene = new Scene(root);
+              Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+              stage.setScene(scene);
+              stage.show();    
+    } 
 }

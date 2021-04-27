@@ -92,7 +92,7 @@ public class UserService {
             pt.setString(1, username);
             ResultSet rs = pt.executeQuery();
             if(rs.next()){
-  User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDate(8));
+  User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDate(9));
                 return u;
             }
         } catch (SQLException ex) {
@@ -100,7 +100,39 @@ public class UserService {
         }
         return null;
     }
-     
+         public User getUserByID(int id){
+        try {
+            PreparedStatement pt= c.prepareStatement("select * from users where id = ?");
+            pt.setInt(1, id);
+            ResultSet rs = pt.executeQuery();
+            if(rs.next()){
+  User u = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getDate(9));
+                return u;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public int coachidabb(int id) throws SQLException{
+        
+        CoachService Cos = new CoachService();
+        User user = UserService.getCurrentUser();
+        if(user.getRoles().contains("[]")){ 
+        String req = ("SELECT coach_id FROM abonnement WHERE user_id ='" +id+ "'");  
+        pst = c.prepareStatement(req);
+        ResultSet rs = pst.executeQuery(req);
+        if(rs.next())
+        id = Cos.getuseridbycoachid(rs.getInt(1)) ;
+         return id;
+  
+        }
+        else if(user.getRoles().contains("[\"ROLE_COACH\"]")){
+        int coach_id = user.getId();
+        return coach_id;    
+       }     
+        return 0;
+    }
      
     
     public static User getCurrentUser() {

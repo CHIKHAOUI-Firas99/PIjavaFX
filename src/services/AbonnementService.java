@@ -22,6 +22,7 @@ public class AbonnementService {
        
     private Connection c;
     private Statement ste;
+    public PreparedStatement pt ;
     public AbonnementService() {
     c = MyConnection.getInstance().getCnx();
      }
@@ -41,8 +42,28 @@ public class AbonnementService {
             } 
              
         return arr ;
-      
+        
     }
-     
-    
+       
+       public List<String> Abonnes(int id){
+         try{
+        List<String> arr = new ArrayList<>();
+        String req = ("SELECT nom,email FROM abonnement INNER JOIN users ON abonnement.user_id = users.id WHERE coach_id='" + id + "'");
+        pt = c.prepareStatement(req);
+        ResultSet rs = pt.executeQuery(req);
+        rs.beforeFirst();
+        while (rs.next()) 
+            {    
+                arr.add(rs.getString("nom")); 
+                arr.add(rs.getString("email"));                 
+            } 
+            return arr ;
+        }
+                  catch (Exception e){
+        System.out.println (e.getMessage());
+        }
+         return null;
+       }
+
+
 }
