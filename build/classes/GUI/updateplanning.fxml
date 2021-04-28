@@ -6,42 +6,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="392.0" prefWidth="336.0" style="-fx-background-color: #232323;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateplanningController">
+<AnchorPane id="AnchorPane" prefHeight="332.0" prefWidth="337.0" style="-fx-background-color: #232323;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateplanningController">
    <children>
-      <TextField fx:id="titre" layoutX="94.0" layoutY="125.0" prefHeight="25.0" prefWidth="212.0" />
-      <TextField fx:id="jour" layoutX="94.0" layoutY="163.0" prefHeight="25.0" prefWidth="212.0" />
-      <TextField fx:id="heure" layoutX="94.0" layoutY="205.0" prefHeight="25.0" prefWidth="212.0" />
-      <TextField fx:id="type" layoutX="94.0" layoutY="246.0" prefHeight="25.0" prefWidth="212.0" />
-      <TextField fx:id="meet" layoutX="92.0" layoutY="288.0" prefHeight="25.0" prefWidth="212.0" />
-      <Button fx:id="Modif" layoutX="246.0" layoutY="341.0" mnemonicParsing="false" onAction="#Modif" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: orange;" text="Modifier" />
-      <TextField fx:id="entid" editable="false" layoutX="94.0" layoutY="87.0" prefHeight="25.0" prefWidth="212.0" />
-      <Button fx:id="supp" layoutX="156.0" layoutY="341.0" mnemonicParsing="false" onAction="#supp" prefHeight="25.0" prefWidth="77.0" text="supprimer" />
-      <Label layoutX="34.0" layoutY="124.0" prefHeight="27.0" prefWidth="50.0" text="Titre :" textFill="#ff7605">
+      <TextField fx:id="titre" layoutX="83.0" layoutY="83.0" prefHeight="25.0" prefWidth="212.0" />
+      <TextField fx:id="jour" layoutX="83.0" layoutY="121.0" prefHeight="25.0" prefWidth="212.0" />
+      <TextField fx:id="heure" layoutX="83.0" layoutY="163.0" prefHeight="25.0" prefWidth="212.0" />
+      <TextField fx:id="type" layoutX="83.0" layoutY="204.0" prefHeight="25.0" prefWidth="212.0" />
+      <TextField fx:id="meet" layoutX="81.0" layoutY="246.0" prefHeight="25.0" prefWidth="212.0" />
+      <Button fx:id="Modif" layoutX="240.0" layoutY="288.0" mnemonicParsing="false" onAction="#Modif" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: orange;" text="Modifier" />
+      <TextField fx:id="entid" editable="false" layoutX="323.0" layoutY="2.0" prefHeight="25.0" prefWidth="6.0" style="-fx-background-color: #232323;" />
+      <Button fx:id="supp" layoutX="151.0" layoutY="288.0" mnemonicParsing="false" onAction="#supp" prefHeight="25.0" prefWidth="77.0" text="supprimer" />
+      <Label layoutX="23.0" layoutY="82.0" prefHeight="27.0" prefWidth="50.0" text="Titre :" textFill="#ff7605">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="162.0" prefHeight="27.0" prefWidth="50.0" text="Jour :" textFill="#ff7605">
+      <Label layoutX="23.0" layoutY="120.0" prefHeight="27.0" prefWidth="50.0" text="Jour :" textFill="#ff7605">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="34.0" layoutY="86.0" prefHeight="27.0" prefWidth="31.0" text="ID :" textFill="#ff7605">
+      <Label layoutX="17.0" layoutY="162.0" prefHeight="25.0" prefWidth="62.0" text="Heure :" textFill="#ff7605">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="28.0" layoutY="204.0" prefHeight="25.0" prefWidth="62.0" text="Heure :" textFill="#ff7605">
+      <Label layoutX="17.0" layoutY="203.0" prefHeight="25.0" prefWidth="62.0" text="Type :" textFill="#ff7605">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="28.0" layoutY="245.0" prefHeight="25.0" prefWidth="62.0" text="Type :" textFill="#ff7605">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="28.0" layoutY="287.0" prefHeight="25.0" prefWidth="62.0" text="Lien :" textFill="#ff7605">
+      <Label layoutX="17.0" layoutY="245.0" prefHeight="25.0" prefWidth="62.0" text="Lien :" textFill="#ff7605">
          <font>
             <Font size="18.0" />
          </font>

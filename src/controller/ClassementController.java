@@ -40,11 +40,11 @@ import services.UserService;
  */
 public class ClassementController implements Initializable {
     @FXML
-    private ImageView img1,img2,img3,img4;
+    private ImageView img1,img2,img3,img4,img5;
     @FXML
-    private Label nom1,nom2,nom3,nom4,num_abb1,num_abb2,num_abb3,num_abb4,
-            m1,m2,m3,m4,
-            bio1,bio2,bio3,bio4;
+    private Label nom1,nom2,nom3,nom4,nom5,num_abb1,num_abb2,num_abb3,num_abb4,num_abb5,
+            m1,m2,m3,m4,m5,
+            bio1,bio2,bio3,bio4,bio5;
 
     /**
      * Initializes the controller class.
@@ -68,7 +68,7 @@ public class ClassementController implements Initializable {
             if(m == 1){
                 InputStream stream;
                 try {
-                    stream = new FileInputStream(coach.image);
+                    stream = new FileInputStream("C:\\wamp\\www\\pi_final\\pi\\public\\uploads\\images\\"+coach.image+"");
                 Image Image = new Image(stream);
                 img1.setImage(Image);
                 nom1.setText(user.getUserByID(coach.user_id).getNom());
@@ -83,7 +83,7 @@ public class ClassementController implements Initializable {
             else if(m == 2){
                 InputStream stream;
                 try {
-                stream = new FileInputStream(coach.image);
+                stream = new FileInputStream("C:\\wamp\\www\\pi_final\\pi\\public\\uploads\\images\\"+coach.image+"");
                 Image Image = new Image(stream);
                 img2.setImage(Image);
                 nom2.setText(user.getUserByID(coach.user_id).getNom());
@@ -98,7 +98,7 @@ public class ClassementController implements Initializable {
             else if(m == 3){
                 InputStream stream;
                 try {
-                stream = new FileInputStream(coach.image);
+                stream = new FileInputStream("C:\\wamp\\www\\pi_final\\pi\\public\\uploads\\images\\"+coach.image+"");
                 Image Image = new Image(stream);
                 img3.setImage(Image);
                 nom3.setText(user.getUserByID(coach.user_id).getNom());
@@ -113,7 +113,7 @@ public class ClassementController implements Initializable {
                 else if(m == 4){
                 InputStream stream;
                 try {
-                stream = new FileInputStream(coach.image);
+                stream = new FileInputStream("C:\\wamp\\www\\pi_final\\pi\\public\\uploads\\images\\"+coach.image+"");
                 Image Image = new Image(stream);
                 img4.setImage(Image);
                 nom4.setText(user.getUserByID(coach.user_id).getNom());
@@ -123,11 +123,27 @@ public class ClassementController implements Initializable {
                 
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(ClassementController.class.getName()).log(Level.SEVERE, null, ex);
-                }    
+                } 
+                }
+                else if(m == 5){
+                InputStream stream;
+                try {
+                stream = new FileInputStream("C:\\wamp\\www\\pi_final\\pi\\public\\uploads\\images\\"+coach.image+"");
+                Image Image = new Image(stream);
+                img5.setImage(Image);
+                nom5.setText(user.getUserByID(coach.user_id).getNom());
+                num_abb5.setText("numéro d'abonnés : "+String.valueOf(mm.get(j+1)));
+                m5.setText(String.valueOf(m));
+                bio5.setText(coach.bio);
+                
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(ClassementController.class.getName()).log(Level.SEVERE, null, ex);
+                }               
             }
             m++;
   
             }
+            
            
         } catch (SQLException ex) {
             Logger.getLogger(ClassementController.class.getName()).log(Level.SEVERE, null, ex);

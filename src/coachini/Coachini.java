@@ -18,6 +18,7 @@ import services.LoginService;
 import services.UserService;
 import services.enc;
 
+
 /**
  *
  * @author LENOVO
@@ -43,6 +44,7 @@ public class Coachini {
         String a = enc.encryptPassword(u.getPassword());
         //u.setPassword(a);
        //us.ajouterUser(u);
+       
        
        
           

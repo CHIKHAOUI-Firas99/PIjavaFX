@@ -6,6 +6,7 @@
 package controller;
 
 import Alert.AlertDialog;
+import entities.Coach;
 import entities.Entrainement;
 import entities.User;
 import java.io.IOException;
@@ -28,9 +29,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import services.AbonnementService;
 import services.CoachService;
 import services.EntrainementService;
 import services.UserService;
+import utils.JavaMailUtil;
 
 /**
  * FXML Controller class
@@ -64,6 +67,10 @@ private TextField entid,titre,jour,heure,type,meet;
         
         }
    public void Modif(ActionEvent event) throws IOException, SQLException{
+            UserService user = new UserService();
+            CoachService CoS = new CoachService();
+            AbonnementService as = new AbonnementService();
+            Coach coach = CoS.InfoCoach(user.getCurrentUser().getId());
             EntrainementService es = new EntrainementService();
             Entrainement e= new Entrainement();
              String Entid = entid.getText().toString();   
@@ -81,23 +88,47 @@ private TextField entid,titre,jour,heure,type,meet;
              e.setMeet(Meet);    
              es.updateEntrainement(e, id);
               Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();              
-              stage1.close(); 
-            AlertDialog.showNotification("Modification","Entrainnement le "+Jour+" a "+Heure+" heures est bien modifier", AlertDialog.image_checked);  
-              
-       
-   }
+              stage1.close();   
+             
+            List <String> abb = as.Abonnes(coach.getId());
+                      for(int j=0; j<abb.size(); j+=2)
+                {                 
+                try {
+                    JavaMailUtil.sendMail(abb.get(j+1));
+                } catch (Exception ex) {
+                    AlertDialog.showErrorMessage(ex);
+                }
+                 }
+            AlertDialog.showNotification("Modification","Entrainnement le "+Jour+" a "+Heure+" heures est bien modifier", AlertDialog.image_checked);          
+              }  
+
    public void supp(ActionEvent event) throws IOException, SQLException{
- 
+UserService user = new UserService();
+            CoachService CoS = new CoachService();
+            AbonnementService as = new AbonnementService();
+            Coach coach = CoS.InfoCoach(user.getCurrentUser().getId());       
             EntrainementService es = new EntrainementService();
             String Entid = entid.getText().toString();  
             int id=Integer.parseInt(Entid);
             es.supprimerEntrainement(id);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();              
             stage.close();
-            AlertDialog.showNotification("Modification","Entrainnement le "+titre.getText().toString()+" a "+heure.getText().toString()+" heures est bien supprimer", AlertDialog.image_checked);
+            
+            List <String> abb = as.Abonnes(coach.getId());
+            for(int j=0; j<abb.size(); j+=2)
+                {                 
+                try {
+                    JavaMailUtil.sendMail(abb.get(j+1));
+                } catch (Exception ex) {
+                    AlertDialog.showErrorMessage(ex);
+                }
+                 }
+            AlertDialog.showNotification("Suppression","Entrainnement Supprimer ", AlertDialog.image_checked);          
+              } 
    }
-   
-}
+
+
+
 
 
     

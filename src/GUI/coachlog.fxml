@@ -85,6 +85,33 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button fx:id="gmail" layoutX="410.0" layoutY="194.0" minWidth="49.0" mnemonicParsing="false" onAction="#gmail" prefHeight="27.0" prefWidth="49.0" style="-fx-background-color: #232323;">
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="27.0">
+               <image>
+                  <Image url="@../../../../../../wamp/www/coachini_java/Coachini/src/images/gmail.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="fb" layoutX="465.0" layoutY="192.0" mnemonicParsing="false" onAction="#fb" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #232323;">
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="27.0">
+               <image>
+                  <Image url="@../../../../../../wamp/www/coachini_java/Coachini/src/images/facebook.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="insta" layoutX="522.0" layoutY="192.0" mnemonicParsing="false" onAction="#insta" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #232323;">
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="27.0">
+               <image>
+                  <Image url="@../../../../../../wamp/www/coachini_java/Coachini/src/images/insta.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />

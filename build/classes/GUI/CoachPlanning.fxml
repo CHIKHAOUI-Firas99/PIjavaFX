@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="545.0" prefWidth="935.0" style="-fx-background-color: #232323;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CoachPlanningController">
+<AnchorPane id="AnchorPane" prefHeight="589.0" prefWidth="969.0" style="-fx-background-color: #232323;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CoachPlanningController">
    <children>
-      <ImageView fitHeight="148.0" fitWidth="772.0" layoutX="165.0">
+      <ImageView fitHeight="148.0" fitWidth="803.0" layoutX="165.0">
          <image>
             <Image url="@../images/breadcrumb-bg.jpg" />
          </image>
       </ImageView>
-      <Pane prefHeight="545.0" prefWidth="165.0" style="-fx-background-color: #151515;">
+      <Pane prefHeight="589.0" prefWidth="165.0" style="-fx-background-color: #151515;">
          <children>
             <ImageView fitHeight="49.0" fitWidth="137.0" layoutX="14.0" layoutY="42.0">
                <image>
@@ -28,10 +28,10 @@
             </ImageView>
             <Button fx:id="planning" layoutY="183.0" mnemonicParsing="false" onAction="#planning" prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: #232323;" text="Votre Planning" textFill="WHITE" />
             <Button fx:id="profile" layoutX="-1.0" layoutY="230.0" mnemonicParsing="false" onAction="#profile" prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: #232323;" text="Profile" textFill="WHITE" />
-            <Button fx:id="Accueil" layoutY="487.0" mnemonicParsing="false" onAction="#Accueil" prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: #232323;" text="Accueil" textFill="WHITE" />
+            <Button fx:id="Accueil" layoutY="518.0" mnemonicParsing="false" onAction="#Accueil" prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: #232323;" text="Accueil" textFill="WHITE" />
          </children>
       </Pane>
-      <Label alignment="CENTER" layoutX="288.0" layoutY="247.0" prefHeight="30.0" prefWidth="92.0" style="-fx-background-color: #ff5300; -fx-border-color: BLACK; -fx-border-width: 2px 0px 2px 2px;" text="Lundi" textAlignment="CENTER" AnchorPane.bottomAnchor="268.0" AnchorPane.rightAnchor="557.0" AnchorPane.topAnchor="247.0" />
+      <Label alignment="CENTER" layoutX="288.0" layoutY="247.0" prefHeight="30.0" prefWidth="92.0" style="-fx-background-color: #ff5300; -fx-border-color: BLACK; -fx-border-width: 2px 0px 2px 2px;" text="Lundi" textAlignment="CENTER" />
       <Label alignment="CENTER" layoutX="379.0" layoutY="247.0" prefHeight="30.0" prefWidth="92.0" style="-fx-background-color: #ff5300; -fx-border-color: BLACK; -fx-border-width: 2px 0px 2px 2px;" text="Mardi" textAlignment="CENTER" />
       <Label alignment="CENTER" layoutX="471.0" layoutY="247.0" prefHeight="30.0" prefWidth="92.0" style="-fx-background-color: #ff5300; -fx-border-color: BLACK; -fx-border-width: 2px 0px 2px 2px;" text="Mercredi" textAlignment="CENTER" />
       <Label alignment="CENTER" layoutX="561.0" layoutY="247.0" prefHeight="30.0" prefWidth="92.0" style="-fx-background-color: #ff5300; -fx-border-color: BLACK; -fx-border-width: 2px 0px 2px 2px;" text="Jeudi" textAlignment="CENTER" />
@@ -154,22 +154,20 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="175.0" layoutY="177.0" prefHeight="43.0" prefWidth="431.0" text="Votre Planinng d'entrainnement" textFill="WHITE">
+      <Label layoutX="165.0" layoutY="155.0" prefHeight="43.0" prefWidth="431.0" text="Votre Planinng d'entrainnement" textFill="WHITE">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Label layoutX="175.0" layoutY="492.0" prefHeight="30.0" prefWidth="165.0" text="Ajouter un entrainnement : " textFill="WHITE">
+      <Label layoutX="175.0" layoutY="518.0" prefHeight="37.0" prefWidth="165.0" text="Ajouter un entrainnement : " textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="titre" layoutX="350.0" layoutY="495.0" prefHeight="8.0" prefWidth="99.0" promptText="titre" />
-      <TextField fx:id="jour" layoutX="458.0" layoutY="495.0" prefHeight="25.0" prefWidth="92.0" promptText="jour" />
-      <TextField fx:id="heure" layoutX="560.0" layoutY="495.0" prefHeight="25.0" prefWidth="92.0" promptText="heure" />
-      <TextField fx:id="type" layoutX="661.0" layoutY="495.0" prefHeight="25.0" prefWidth="92.0" promptText="type" />
-      <TextField fx:id="meet" layoutX="762.0" layoutY="495.0" prefHeight="25.0" prefWidth="92.0" promptText="meet" />
-      <Button fx:id="ajouter" layoutX="867.0" layoutY="492.0" mnemonicParsing="false" onAction="#ajouter" text="ajouter" />
+      <TextField fx:id="titre" layoutX="568.0" layoutY="523.0" prefHeight="8.0" prefWidth="99.0" promptText="titre" />
+      <TextField fx:id="type" layoutX="684.0" layoutY="523.0" prefHeight="25.0" prefWidth="92.0" promptText="type" />
+      <TextField fx:id="meet" layoutX="788.0" layoutY="523.0" prefHeight="25.0" prefWidth="92.0" promptText="meet" />
+      <Button fx:id="ajouter" layoutX="899.0" layoutY="521.0" mnemonicParsing="false" onAction="#ajouter" text="ajouter" />
       <Hyperlink fx:id="md_lundi_8" layoutX="334.0" layoutY="302.0" onAction="#md_lundi_8" prefHeight="26.0" prefWidth="45.0">
          <font>
             <Font size="9.0" />
@@ -450,8 +448,21 @@
             <Font size="9.0" />
          </font>
       </Hyperlink>
-      <Button fx:id="Music" layoutX="742.0" layoutY="177.0" mnemonicParsing="false" onAction="#Music" prefHeight="30.0" prefWidth="178.0" text="Music Coachini" />
-      <ComboBox fx:id="box" layoutX="595.0" layoutY="179.0" prefHeight="27.0" prefWidth="99.0" promptText="Jour" />
+      <Button fx:id="Music" layoutX="181.0" layoutY="206.0" mnemonicParsing="false" onAction="#Music" prefHeight="30.0" prefWidth="389.0" style="-fx-background-color: #151515;" text="Music Coachini" textFill="WHITE" />
+      <ComboBox fx:id="box" layoutX="342.0" layoutY="523.0" prefHeight="27.0" prefWidth="99.0" promptText="Jour" style="-fx-background-color: #151515;" />
+      <Pane layoutX="606.0" layoutY="155.0" prefHeight="86.0" prefWidth="318.0">
+         <children>
+            <TextField fx:id="chrono" editable="false" layoutX="14.0" layoutY="43.0" />
+            <Button fx:id="starstop" layoutX="180.0" layoutY="43.0" mnemonicParsing="false" style="-fx-background-color: #151515;" text="Start" textFill="#fffefe" />
+            <Button fx:id="reset" layoutX="255.0" layoutY="43.0" mnemonicParsing="false" style="-fx-background-color: #151515;" text="Reset" textFill="WHITE" />
+            <Label layoutX="105.0" layoutY="-7.0" prefHeight="43.0" prefWidth="122.0" text="Chronomètre :" textFill="#ff5300">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ComboBox fx:id="Heure" layoutX="448.0" layoutY="523.0" prefHeight="27.0" prefWidth="113.0" promptText="Heure" style="-fx-background-color: #151515;" />
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />

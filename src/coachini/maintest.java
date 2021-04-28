@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
+
 /**
  *
  * @author 21652
@@ -23,11 +24,12 @@ public class maintest extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        
+                
             Parent parent = FXMLLoader.load(getClass().getResource("/GUI/connection.fxml"));
             Scene scene = new Scene(parent);
             primaryStage.setScene(scene);
             primaryStage.show();
+            
     }
 
     

@@ -5,14 +5,19 @@
  */
 package controller;
 
+import Alert.AlertDialog;
 import entities.Coach;
 import entities.User;
+import java.awt.Desktop;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -50,7 +55,7 @@ public class CoachlogController implements Initializable {
     @FXML 
     ListView<String> List_Abb;
     @FXML
-    private Button planning;
+    private Button planning,gmail,fb,insta;
     @FXML
     private ImageView image;
 
@@ -121,11 +126,17 @@ public class CoachlogController implements Initializable {
               stage.show();
     }
     public void md_profile(ActionEvent event) throws IOException{
+        User user = UserService.getCurrentUser();
+        if(user.getRoles().contains("[]")){
+        AlertDialog.showNotification("Cher Abonné","Seulement votre coach peut ajouter un entrainnement ", AlertDialog.image_cross);
+        }
+        else{
               Parent root = FXMLLoader.load(getClass().getResource("/GUI/ProfileEdit.fxml")); 
               Scene scene = new Scene(root);
               Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
               stage.setScene(scene);
               stage.show();
+        }
     }   
     
     public void classement(ActionEvent event) throws IOException{
@@ -144,4 +155,51 @@ public class CoachlogController implements Initializable {
               stage.setScene(scene);
               stage.show();    
     } 
+       public void gmail(ActionEvent event) throws IOException, SQLException{
+        UserService srvUser = new UserService();
+        CoachService cch = new CoachService(); 
+        AbonnementService as = new AbonnementService();
+        Coach coach = cch.InfoCoach(srvUser.coachidabb(srvUser.getCurrentUser().getId()));
+        Desktop desktop = java.awt.Desktop.getDesktop();
+        URI oURL;
+        try {
+        oURL = new URI(coach.insta);
+        desktop.browse(oURL);
+        } catch (URISyntaxException ex) {
+            AlertDialog.showErrorMessage(ex);
+        }
+       }
+        public void fb(ActionEvent event) throws IOException, SQLException{
+        UserService srvUser = new UserService();
+        CoachService cch = new CoachService(); 
+        AbonnementService as = new AbonnementService();
+        Coach coach = cch.InfoCoach(srvUser.coachidabb(srvUser.getCurrentUser().getId()));
+        Desktop desktop = java.awt.Desktop.getDesktop();
+        URI oURL;
+        try {
+        oURL = new URI(coach.facebook);
+        desktop.browse(oURL);
+        } catch (URISyntaxException ex) {
+            AlertDialog.showErrorMessage(ex);
+        } 
+        }
+        
+        public void insta(ActionEvent event) throws IOException, SQLException{
+        UserService srvUser = new UserService();
+        CoachService cch = new CoachService(); 
+        AbonnementService as = new AbonnementService();
+        Coach coach = cch.InfoCoach(srvUser.coachidabb(srvUser.getCurrentUser().getId()));
+        Desktop desktop = java.awt.Desktop.getDesktop();
+        URI oURL;
+        try {
+        oURL = new URI(coach.insta);
+        desktop.browse(oURL);
+        } catch (URISyntaxException ex) {
+            AlertDialog.showErrorMessage(ex);
+        }
+    
+        
+       }
+
+
 }

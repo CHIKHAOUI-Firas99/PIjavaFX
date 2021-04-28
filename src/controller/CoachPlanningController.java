@@ -6,6 +6,8 @@
 package controller;
 
 
+import Alert.AlertDialog;
+import entities.Coach;
 import entities.Entrainement;
 import entities.User;
 import java.awt.Desktop;
@@ -18,6 +20,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,12 +35,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import services.AbonnementService;
 import services.CoachService;
 import services.EntrainementService;
 import services.UserService;
+import utils.JavaMailUtil;
 
 /**
  * FXML Controller class
@@ -55,7 +62,7 @@ public class CoachPlanningController implements Initializable {
                       samedi_8,samedi_12,samedi_17,samedi_19,
                       dimanche_8,dimanche_12,dimanche_17,dimanche_19;
     @FXML 
-    private TextField titre,jour,heure,type,meet;
+    private TextField titre,jour,heure,type,meet,chrono;
     @FXML
     private Hyperlink md_lundi_8,md_lundi_12,md_lundi_17,md_lundi_19,
                       md_mardi_8,md_mardi_12,md_mardi_17,md_mardi_19,
@@ -75,25 +82,70 @@ public class CoachPlanningController implements Initializable {
                       
                       
     @FXML 
-    private Button ajouter;
+    private Button ajouter,starstop,reset;
     @FXML
-    ComboBox box;
+    ComboBox box,Heure,Type;
     
     
-
-
+    
+    
+    Timeline timeline;
+    int mins = 0, secs = 0, millis = 0;
+    boolean sos = true;
+    
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {    
-    System.out.println("hello");
+    public void initialize(URL url, ResourceBundle rb) {       
+    chrono.setText("00:00:000");
+		timeline = new Timeline(new KeyFrame(Duration.millis(1), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+            	change(chrono);
+			}
+		}));
+                
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.setAutoReverse(false);
+		
+            starstop.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	if(sos) {
+            		timeline.play();
+            		sos = false;
+            		starstop.setText("Stop");
+            	} else {
+            		timeline.pause();
+            		sos = true;
+            		starstop.setText("Start");
+            	}
+            }
+        });
+		
+            reset.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	mins = 0;
+            	secs = 0;
+            	millis = 0;
+            	timeline.pause();
+            	chrono.setText("00:00:000");
+            	if(!sos) {
+            		sos = true;
+            		starstop.setText("Start");
+            	}
+            }
+        });    
+           
+    
     UserService srvUser = new UserService();
     AbonnementService abb = new AbonnementService();
      EntrainementService es = new EntrainementService();
      CoachService CoS = new CoachService();
      box.getItems().addAll("Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche");
-     
+     Heure.getItems().addAll("6.00am - 8.00am","10.00am - 12.00am","5.00pm - 7.00pm","7.00pm - 9.00pm");
         try {
         List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));
             for(int j=0; j<e.size(); j++){    
@@ -115,7 +167,7 @@ public class CoachPlanningController implements Initializable {
             }
             
                 }
-            else if (e.get(j).jour.equals("Lundi") && e.get(j).heure == 17 ){
+            else if (e.get(j).jour.equals("Lundi") && e.get(j).heure == 16 ){
                               lundi_17.setText(e.get(j).titre);
                               meet12.setText("meet");
             if(srvUser.getCurrentUser().getRoles().contains("[\"ROLE_COACH\"]")){                   
@@ -123,7 +175,7 @@ public class CoachPlanningController implements Initializable {
             }              
             
                 }
-            else if (e.get(j).jour.equals("Lundi") && e.get(j).heure == 19 ){
+            else if (e.get(j).jour.equals("Lundi") && e.get(j).heure == 20 ){
                               lundi_19.setText(e.get(j).titre);
                               meet13.setText("meet");
             if(srvUser.getCurrentUser().getRoles().contains("[\"ROLE_COACH\"]")){                  
@@ -146,7 +198,7 @@ public class CoachPlanningController implements Initializable {
                               md_mardi_12.setText("Modifier");
             }            
                 }
-            else if (e.get(j).jour.equals("Mardi") && e.get(j).heure == 17 ){
+            else if (e.get(j).jour.equals("Mardi") && e.get(j).heure == 16 ){
                               mardi_17.setText(e.get(j).titre);       
                               meet16.setText("meet");
                               
@@ -155,7 +207,7 @@ public class CoachPlanningController implements Initializable {
             }  
             
                 }
-            else if (e.get(j).jour.equals("Mardi") && e.get(j).heure == 19 ){
+            else if (e.get(j).jour.equals("Mardi") && e.get(j).heure == 20 ){
                               mardi_19.setText(e.get(j).titre);
                               meet17.setText("meet");
                               
@@ -182,7 +234,7 @@ public class CoachPlanningController implements Initializable {
             }                                
             
             }
-            else if (e.get(j).jour.equals("Mercredi") && e.get(j).heure == 17 ){
+            else if (e.get(j).jour.equals("Mercredi") && e.get(j).heure == 16 ){
                               mercredi_17.setText(e.get(j).titre);
                               meet110.setText("meet");
                               
@@ -190,7 +242,7 @@ public class CoachPlanningController implements Initializable {
                               md_mercredi_17.setText("Modifier");
             }                               
             } 
-            else if (e.get(j).jour.equals("Mercredi") && e.get(j).heure == 19 ){
+            else if (e.get(j).jour.equals("Mercredi") && e.get(j).heure == 20 ){
                               mercredi_19.setText(e.get(j).titre);
                               meet111.setText("meet");
                               
@@ -215,7 +267,7 @@ public class CoachPlanningController implements Initializable {
             }                               
                               
         }
-            else if (e.get(j).jour.equals("Jeudi") && e.get(j).heure == 17 ){
+            else if (e.get(j).jour.equals("Jeudi") && e.get(j).heure == 16 ){
                               jeudi_17.setText(e.get(j).titre);
                               meet114.setText("meet");
                               
@@ -223,7 +275,7 @@ public class CoachPlanningController implements Initializable {
                               md_jeudi_17.setText("Modifier");
             }                      
         }  
-            else if (e.get(j).jour.equals("Jeudi") && e.get(j).heure == 19 ){
+            else if (e.get(j).jour.equals("Jeudi") && e.get(j).heure == 20 ){
                               jeudi_19.setText(e.get(j).titre);
 
                               meet115.setText("meet");
@@ -247,7 +299,7 @@ public class CoachPlanningController implements Initializable {
                               md_vendredi_12.setText("Modifier");
             }                               
         }
-            else if (e.get(j).jour.equals("Vendredi") && e.get(j).heure == 17 ){
+            else if (e.get(j).jour.equals("Vendredi") && e.get(j).heure == 16 ){
                               vendredi_17.setText(e.get(j).titre);
                               
                               meet118.setText("meet");
@@ -255,7 +307,7 @@ public class CoachPlanningController implements Initializable {
                               md_vendredi_17.setText("Modifier");
             }                               
         }
-            else if (e.get(j).jour.equals("Vendredi") && e.get(j).heure == 19 ){
+            else if (e.get(j).jour.equals("Vendredi") && e.get(j).heure == 20 ){
                               vendredi_19.setText(e.get(j).titre);
                               meet119.setText("meet");
                               
@@ -282,7 +334,7 @@ public class CoachPlanningController implements Initializable {
                               
             
         }
-            else if (e.get(j).jour.equals("Samedi") && e.get(j).heure == 17 ){
+            else if (e.get(j).jour.equals("Samedi") && e.get(j).heure == 16 ){
                               samedi_17.setText(e.get(j).titre);
                               meet122.setText("meet");
                               
@@ -291,7 +343,7 @@ public class CoachPlanningController implements Initializable {
             }                              
             
         }
-            else if (e.get(j).jour.equals("Samedi") && e.get(j).heure == 19 ){
+            else if (e.get(j).jour.equals("Samedi") && e.get(j).heure == 20 ){
                               samedi_19.setText(e.get(j).titre);
                               meet123.setText("meet");
 
@@ -317,7 +369,7 @@ public class CoachPlanningController implements Initializable {
             }                               
             
         }
-            else if (e.get(j).jour.equals("Dimanche") && e.get(j).heure == 17 ){
+            else if (e.get(j).jour.equals("Dimanche") && e.get(j).heure == 16 ){
                               dimanche_17.setText(e.get(j).titre);
                               meet126.setText("meet");
                               
@@ -326,7 +378,7 @@ public class CoachPlanningController implements Initializable {
             }                               
             
         }
-            else if (e.get(j).jour.equals("Dimanche") && e.get(j).heure == 19 ){
+            else if (e.get(j).jour.equals("Dimanche") && e.get(j).heure == 20 ){
                               dimanche_19.setText(e.get(j).titre); 
                               meet127.setText("meet");
                               
@@ -351,38 +403,75 @@ public class CoachPlanningController implements Initializable {
               stage.setScene(scene);
               stage.show();
     }
-              public void ajouter(ActionEvent event) throws IOException, SQLException{                   
+              public void ajouter(ActionEvent event) throws IOException, SQLException, Exception{                   
                                  
-              UserService user = new UserService(); 
-              if(user.getCurrentUser().getRoles().contains("[\"ROLE_COACH\"]"))
+              UserService user = new UserService();
+              if(user.getCurrentUser().getRoles().contains("[]")){   
+               AlertDialog.showNotification("Cher Abonné","Seulement votre coach peut ajouter un entrainnement ", AlertDialog.image_cross);   
+              }
+              else if(user.getCurrentUser().getRoles().contains("[\"ROLE_COACH\"]"))
               {
-              
               Entrainement e= new Entrainement();
               EntrainementService es = new EntrainementService();
               CoachService CoS = new CoachService();
+              Coach coach = CoS.InfoCoach(user.getCurrentUser().getId());
+              AbonnementService as = new AbonnementService();  
               String Titre = titre.getText().toString();
-              String Jour = jour.getText().toString();
-              String Heure = heure.getText().toString();
+              String jour = (String) box.getSelectionModel().getSelectedItem();
+              String heure = (String) Heure.getSelectionModel().getSelectedItem();
               String Type = type.getText().toString();
               String Meet = meet.getText().toString();   
-              e.setCoach_id(CoS.getcoachidbyuserid(user.getCurrentUser().getId())); 
-              e.setTitre(Titre);
-              e.setJour(Jour);
-              int i=Integer.parseInt(Heure);  
-              e.setHeure(i);
+              e.setCoach_id(CoS.getcoachidbyuserid(user.getCurrentUser().getId()));
+          
+              if(jour != null && heure!= null && titre.getText().length()!=0  ){
+                e.setTitre(Titre);  
+                e.setJour(jour);
+                if(heure.equalsIgnoreCase("6.00am - 8.00am")){    
+                int i= 8 ;
+                e.setHeure(i);
+                }
+                else if(heure.equalsIgnoreCase("10.00am - 12.00am")){
+                 int i = 12;       
+                e.setHeure(i);
+                }
+                else if(heure.equalsIgnoreCase("5.00pm - 7.00pm")){
+                 int i = 16;       
+                 e.setHeure(i);
+                } 
+               else if(heure.equalsIgnoreCase("7.00pm - 9.00pm")){
+                 int i = 20;   
+                 e.setHeure(i);
+                }
               e.setType(Type);
               e.setMeet(Meet);    
-              es.ajouterEntrainement(e); 
+              es.ajouterEntrainement(e);
+              
               Parent root = FXMLLoader.load(getClass().getResource("/GUI/CoachPlanning.fxml")); 
               Scene scene = new Scene(root);
               Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
               stage1.setScene(scene);
               stage1.show();
+              List <String> abb = as.Abonnes(coach.getId());
+                      for(int j=0; j<abb.size(); j+=2)
+                {                 
+                   JavaMailUtil.sendMail(abb.get(j+1));
+                 }
+              AlertDialog.showNotification("Ajout","Entrainnement le "+box.getSelectionModel().getSelectedItem()+" a "+Heure.getSelectionModel().getSelectedItem()+" bien Ajouter", AlertDialog.image_checked);        
+              }
+              else if(heure == null){ 
+                  AlertDialog.showNotification("Ajout","vous devez choisir l'heure", AlertDialog.image_cross);
+                
+              }
+              else if(jour == null){ 
+                  AlertDialog.showNotification("Ajout","vous devez choisir un jour", AlertDialog.image_cross);    
+              }
+             else if(titre.getText().length()== 0){ 
+                  AlertDialog.showNotification("Ajout","vous devez choisir un titre", AlertDialog.image_cross);    
+              }
+                
               }
               }
-
-              
-              
+          
     public void md_lundi_8(ActionEvent event) throws IOException, SQLException{
             FXMLLoader loader = new FXMLLoader ();
             User user = UserService.getCurrentUser();
@@ -448,7 +537,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 17 ){  
+                         if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 16 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -472,7 +561,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 19 ){  
+                         if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 20 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -544,7 +633,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 17 ){  
+                         if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 16 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -568,7 +657,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 19 ){  
+                         if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 20 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -640,7 +729,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 17 ){  
+                         if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 16 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -664,7 +753,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 19 ){  
+                         if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 20 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -736,7 +825,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 17 ){  
+                         if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 16 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -760,7 +849,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 19 ){  
+                         if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 20 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -832,7 +921,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 17 ){  
+                         if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 16 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -856,7 +945,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 19 ){  
+                         if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 20 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -928,7 +1017,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 17 ){  
+                         if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 16 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -952,7 +1041,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 19 ){  
+                         if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 20 ){  
                          up.setTextField(e.get(j).id,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -1011,7 +1100,7 @@ public class CoachPlanningController implements Initializable {
                          stage.show();        
         }
     public void md_dimanche_17(ActionEvent event) throws IOException, SQLException{
-                                  FXMLLoader loader = new FXMLLoader ();
+            FXMLLoader loader = new FXMLLoader ();
             User user = UserService.getCurrentUser();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
@@ -1024,7 +1113,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 17 ){  
+                         if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 16 ){  
                          up.setTextField(e.get(j).id, e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -1048,7 +1137,7 @@ public class CoachPlanningController implements Initializable {
                          } 
                          UpdateplanningController up = loader.getController();
                          for(int j=0; j<e.size(); j++){
-                         if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 19 ){  
+                         if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 20 ){  
                          up.setTextField(e.get(j).id ,e.get(j).titre, e.get(j).jour,e.get(j).heure, e.get(j).type, e.get(j).meet);
                          }
                          }
@@ -1068,36 +1157,395 @@ public class CoachPlanningController implements Initializable {
               stage.show();
     }
         public void meet1(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 8 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
-            URI oURL = new URI("www.meet.com");
-            desktop.browse(oURL);}
-        public void meet11(ActionEvent event) throws IOException, SQLException{}
-        public void meet12(ActionEvent event) throws IOException, SQLException{}
-        public void meet13(ActionEvent event) throws IOException, SQLException{}
-        public void meet14(ActionEvent event) throws IOException, SQLException{}
-        public void meet15(ActionEvent event) throws IOException, SQLException{}
-        public void meet16(ActionEvent event) throws IOException, SQLException{}
-        public void meet17(ActionEvent event) throws IOException, SQLException{}
-        public void meet18(ActionEvent event) throws IOException, SQLException{}
-        public void meet19(ActionEvent event) throws IOException, SQLException{}
-        public void meet110(ActionEvent event) throws IOException, SQLException{}
-        public void meet111(ActionEvent event) throws IOException, SQLException{}
-        public void meet112(ActionEvent event) throws IOException, SQLException{}
-        public void meet113(ActionEvent event) throws IOException, SQLException{}
-        public void meet114(ActionEvent event) throws IOException, SQLException{}
-        public void meet115(ActionEvent event) throws IOException, SQLException{}
-        public void meet116(ActionEvent event) throws IOException, SQLException{}
-        public void meet117(ActionEvent event) throws IOException, SQLException{}
-        public void meet118(ActionEvent event) throws IOException, SQLException{}
-        public void meet119(ActionEvent event) throws IOException, SQLException{}
-        public void meet120(ActionEvent event) throws IOException, SQLException{}
-        public void meet121(ActionEvent event) throws IOException, SQLException{}
-        public void meet122(ActionEvent event) throws IOException, SQLException{}
-        public void meet123(ActionEvent event) throws IOException, SQLException{}
-        public void meet124(ActionEvent event) throws IOException, SQLException{}
-        public void meet125(ActionEvent event) throws IOException, SQLException{}
-        public void meet126(ActionEvent event) throws IOException, SQLException{}
-        public void meet127(ActionEvent event) throws IOException, SQLException{}
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+            }
+           }
+
+        public void meet11(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+           User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 12 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+            }
+        }
+        public void meet12(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 16 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+            }
+        
+        }
+        public void meet13(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 20 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+            }
+        }
+        public void meet14(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+                    User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 8 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+            }}
+        public void meet15(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+                            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 12 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+           }
+        }
+        public void meet16(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+        
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 16 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+           }
+        
+        }
+        public void meet17(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+                    User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 20 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+           }
+        }
+        public void meet18(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+                    User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 8 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+           }
+        
+        }
+        public void meet19(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+                            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 12 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+           }
+        }
+        public void meet110(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 16 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+           }
+        
+        }
+        public void meet111(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 20 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+           }
+        
+        }
+        public void meet112(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 8 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+           }
+        
+        
+        }
+        public void meet113(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 12 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+            }
+        
+        }
+        }
+        public void meet114(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 16 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }        
+        
+        }
+        public void meet115(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 20 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }
+        }
+        public void meet116(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 8 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }
+        
+        }
+        public void meet117(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 12 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }        
+        
+        }
+        public void meet118(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 16 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }        
+        
+        }
+        public void meet119(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+                    User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 20 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }
+        
+        }
+        public void meet120(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 8 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }
+        
+        }
+        public void meet121(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 12 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }
+        
+        
+        }
+        public void meet122(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 16 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }
+        
+        }
+        public void meet123(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 20 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }        
+        
+        
+        
+        }
+        public void meet124(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 8 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }          
+        }
+        public void meet125(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 12 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }         
+        
+        }
+        public void meet126(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+            User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 16 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        }            
+        }
+        public void meet127(ActionEvent event) throws IOException, SQLException, URISyntaxException{
+                    User user = UserService.getCurrentUser();
+            EntrainementService es = new EntrainementService();
+            CoachService CoS = new CoachService();
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            for(int j=0; j<e.size(); j++){
+            if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 20 ){  
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(e.get(j).meet);
+            desktop.browse(oURL);
+           }
+        } 
+        
+        
+        
+        
+        }
     
         
     public void Accueil(ActionEvent event) throws IOException{          
@@ -1115,9 +1563,26 @@ public class CoachPlanningController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(parent));
         stage.initStyle(StageStyle.UTILITY);
-        stage.show();   
+        stage.show(); 
+        if(titre.getText().length()==0){
+       System.out.println("ok");
+        }
+    }
+    void change(TextField text) {
+		if(millis == 1000) {
+			secs++;
+			millis = 0;
+		}
+		if(secs == 60) {
+			mins++;
+			secs = 0;
+		}
+		text.setText((((mins/10) == 0) ? "0" : "") + mins + ":"
+		 + (((secs/10) == 0) ? "0" : "") + secs + ":" 
+			+ (((millis/10) == 0) ? "00" : (((millis/100) == 0) ? "0" : "")) + millis++);
     }
 }   
+
 
 
            
