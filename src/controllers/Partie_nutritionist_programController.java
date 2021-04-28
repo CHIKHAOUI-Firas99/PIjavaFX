@@ -57,8 +57,7 @@ public class Partie_nutritionist_programController implements Initializable {
     private TextField txt_Seach;
     @FXML
     private TableView<programmenutrition> tabview;
-    @FXML
-    private TableColumn<programmenutrition, Integer> col_id;
+  
     @FXML
     private TableColumn<programmenutrition, Integer> col_user_id;
     @FXML
@@ -127,7 +126,7 @@ public class Partie_nutritionist_programController implements Initializable {
             Stage stage = (Stage) node.getScene().getWindow();
             //stage.setMaximized(true);
             stage.close();
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/GUI/Profile_nutritionist_program.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/GUI/Profile_nutritionist.fxml")));
             stage.setScene(scene);
             stage.show();
         }
@@ -145,7 +144,7 @@ public class Partie_nutritionist_programController implements Initializable {
             } else {
 
                 try {
-              col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+            
         col_user_id.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         col_info_user_nutrition_id.setCellValueFactory(new PropertyValueFactory<>("info_user_nutrition_id"));
         col_repas1.setCellValueFactory(new PropertyValueFactory<>("repas1"));
@@ -176,7 +175,7 @@ public class Partie_nutritionist_programController implements Initializable {
   
        public void refreche() throws SQLException {
 
-        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+
         col_user_id.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         col_info_user_nutrition_id.setCellValueFactory(new PropertyValueFactory<>("info_user_nutrition_id"));
         col_repas1.setCellValueFactory(new PropertyValueFactory<>("repas1"));

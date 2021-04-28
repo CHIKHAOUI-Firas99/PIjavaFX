@@ -52,8 +52,7 @@ public class Partie_nutritionistController implements Initializable {
     private TextField txt_Seach;
     @FXML
     private TableView<info_user_nutrition> tabview;
-    @FXML
-    private TableColumn<info_user_nutrition, Integer> col_id;
+  
     @FXML
     private TableColumn<info_user_nutrition, Integer> col_user_id;
     @FXML
@@ -160,7 +159,7 @@ public class Partie_nutritionistController implements Initializable {
 
     }
     public void refreche() throws SQLException {
-        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+  
         col_user_id.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         col_programme_id.setCellValueFactory(new PropertyValueFactory<>("programmenutrition_id"));
         col_objectif.setCellValueFactory(new PropertyValueFactory<>("ojectif"));
@@ -182,66 +181,66 @@ public class Partie_nutritionistController implements Initializable {
     private void Ajouter(ActionEvent event) throws SQLException {
             if (txt_repas_1.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_repas_1",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ repas_1 vide",AlertDialog.image_cross);
 
         }
          else if (txt_repas_1.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_repas_1 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ repas_1 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
          else  if (txt_repas_2.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_repas_2",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ repas_2 vide",AlertDialog.image_cross);
 
         }
          else if (txt_repas_2.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_repas_2 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ repas_2 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
          else   if (txt_repas_3.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_repas_3",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ repas_3",AlertDialog.image_cross);
 
         }
          else if (txt_repas_3.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_repas_3 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ repas_3 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
         else   if (txt_repas_4.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_repas_4",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ repas_4 vide",AlertDialog.image_cross);
 
         }
          else if (txt_repas_4.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_repas_4 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ repas_4 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
           else if (txt_repas_5.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_repas_5",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ repas_5 vide ",AlertDialog.image_cross);
 
         }
          else if (txt_repas_5.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_repas_5 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ repas_5 !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
         else  if (txt_duree.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_duree",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ duree",AlertDialog.image_cross);
 
         }
          else if (txt_duree.getText().matches("^[a-zA-Z]+$")) {
             AlertDialog.showNotification("Erreur ", "duree incorrect", AlertDialog.image_cross);
         } else if (Integer.valueOf(txt_duree.getText()) <= 0) {
-            AlertDialog.showNotification("Error !", "Champ de duree", AlertDialog.image_cross);
+            AlertDialog.showNotification("Error !", "Champ de duree incorrect", AlertDialog.image_cross);
         }
             else if (txt_jourrepot.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_jourrepot",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ jourrepot vide",AlertDialog.image_cross);
 
         }
          else if (txt_jourrepot.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_jourrepot !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ jourrepot !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
          else {
              if ( info.getProgrammenutrition_id() == 1)
              {
-                 // 1 -> maneha dima nutisoniste id teeou 1 baed f login tbdl 1 hasb el id de nutionist
+                 // 1 -> dima nutisoniste id teeou 1 baed f login tbdl 1 hasb el id de nutionist
                  programmenutrition p = new programmenutrition(info.getId(),info.getUser_id() , 7, txt_repas_1.getText(), txt_repas_2.getText(), txt_repas_3.getText(), txt_repas_4.getText(), txt_repas_5.getText(), Integer.valueOf(txt_duree.getText()), txt_jourrepot.getText());
                programmenutrition_Service servi = new programmenutrition_Service();
             
@@ -281,7 +280,7 @@ public class Partie_nutritionistController implements Initializable {
             } else {
 
                 try {
-                         col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                     
         col_user_id.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         col_programme_id.setCellValueFactory(new PropertyValueFactory<>("programmenutrition_id"));
         col_objectif.setCellValueFactory(new PropertyValueFactory<>("ojectif"));

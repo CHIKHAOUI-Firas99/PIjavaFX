@@ -9,6 +9,7 @@ import Alert.AlertDialog;
 import Service.info_user_nutrition_Service;
 import Service.nutritionist_Service;
 import static controllers.Item_NouristeController.nutritionis_pour_affichage_program;
+import entites.BadWords;
 import entites.info_user_nutrition;
 import java.io.IOException;
 import java.net.URL;
@@ -29,7 +30,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Aymen
+ * @author Aziz
  */
 public class Affichageprograms_nutriste_Front implements Initializable {
 
@@ -83,86 +84,117 @@ public class Affichageprograms_nutriste_Front implements Initializable {
 
     @FXML
     private void Ajouter(ActionEvent event) throws SQLException {
+               BadWords.loadConfigs();
+
+        {
             if (txt_objectif.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_objectif",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error Champ objectif!","Champ objectif",AlertDialog.image_cross);
 
         }
          else if (txt_objectif.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_objectif !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ objectif !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
+             else if (BadWords.filterText(txt_objectif.getText())) {
+
+                AlertDialog.showNotification("Error !", "cette application n'autorise pas ces termes", AlertDialog.image_cross);
+
+            } 
          else   if (txt_blessure.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_blessure",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ blessure",AlertDialog.image_cross);
 
         }
          else if (txt_blessure.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_blessure !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ blessure !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
+          else if (BadWords.filterText(txt_blessure.getText())) {
+
+                AlertDialog.showNotification("Error !", "cette application n'autorise pas ces termes", AlertDialog.image_cross);
+
+            } 
           else   if (txt_mangezpas.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_mangezpas",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","champ mangezpas vide ",AlertDialog.image_cross);
 
         }
          else if (txt_mangezpas.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_mangezpas !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ mangezpas !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
+             else if (BadWords.filterText(txt_mangezpas.getText())) {
+
+                AlertDialog.showNotification("Error !", "cette application n'autorise pas ces termes", AlertDialog.image_cross);
+
+            } 
           else   if (txt_supplementali.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_supplementali",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ supplementali vide",AlertDialog.image_cross);
 
         }
          else if (txt_supplementali.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_supplementali !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ supplementali !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
-         
+           else if (BadWords.filterText(txt_supplementali.getText())) {
+
+                AlertDialog.showNotification("Error !", "cette application n'autorise pas ces termes", AlertDialog.image_cross);
+
+            } 
           else   if (txt_probleme.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_probleme",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ probleme",AlertDialog.image_cross);
 
         }
          else if (txt_probleme.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_probleme !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ probleme !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
-         
+            else if (BadWords.filterText(txt_probleme.getText())) {
+
+                AlertDialog.showNotification("Error !", "cette application n'autorise pas ces termes", AlertDialog.image_cross);
+
+            }
         else  if (txt_age.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_age",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ age",AlertDialog.image_cross);
 
         }
          else if (txt_age.getText().matches("^[a-zA-Z]+$")) {
-            AlertDialog.showNotification("Erreur ", "txt_age incorrect", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur ", "Champ age incorrect", AlertDialog.image_cross);
         } else if (Integer.valueOf(txt_age.getText()) <= 0) {
-            AlertDialog.showNotification("Error !", "Champ de txt_age", AlertDialog.image_cross);
+            AlertDialog.showNotification("Error !", "Champ de Champ age", AlertDialog.image_cross);
         }
                else  if (txt_taille.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_taille",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ taille",AlertDialog.image_cross);
 
         }
          else if (txt_taille.getText().matches("^[a-zA-Z]+$")) {
-            AlertDialog.showNotification("Erreur ", "txt_taille incorrect", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur ", "Champ taille incorrect", AlertDialog.image_cross);
         } else if (Integer.valueOf(txt_taille.getText()) <= 0) {
-            AlertDialog.showNotification("Error !", "Champ de txt_taille", AlertDialog.image_cross);
+            AlertDialog.showNotification("Error !", "Champ de taille incorrect", AlertDialog.image_cross);
         }
             else  if (txt_poids.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_poids",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","champ poids",AlertDialog.image_cross);
 
         }
          else if (txt_poids.getText().matches("^[a-zA-Z]+$")) {
-            AlertDialog.showNotification("Erreur ", "txt_poids incorrect", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur ", "Champ poids incorrect", AlertDialog.image_cross);
         } else if (Integer.valueOf(txt_poids.getText()) <= 0) {
-            AlertDialog.showNotification("Error !", "Champ de txt_poids", AlertDialog.image_cross);
+            AlertDialog.showNotification("Error !", "Champ de poids incorrect", AlertDialog.image_cross);
         }
         else   if (txt_sexe.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","txt_sexe",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","Champ de sexe vide ",AlertDialog.image_cross);
 
         }
          else if (txt_sexe.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_sexe !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ sexe !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
+           else if (BadWords.filterText(txt_sexe.getText())) {
+
+                AlertDialog.showNotification("Error !", "cette application n'autorise pas ces termes", AlertDialog.image_cross);
+
+            }
          
         
             else
@@ -172,6 +204,7 @@ public class Affichageprograms_nutriste_Front implements Initializable {
                 AlertDialog.showNotification("Ajout!", "Ajout!", AlertDialog.image_checked);
        
         }
+    }
     }
     
 }

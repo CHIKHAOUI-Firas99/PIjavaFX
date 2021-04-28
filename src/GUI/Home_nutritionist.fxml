@@ -82,6 +82,7 @@
                               <Label text="Total Nutrisionniste" textFill="#555555" />
                            </children>
                         </VBox>
+                        <Button fx:id="Stat" mnemonicParsing="false" onAction="#faire_stat" text="Stat" />
                      </children>
                   </HBox>
                   <TableView fx:id="tabview" layoutX="52.0" layoutY="164.0" prefHeight="306.0" prefWidth="688.0" style="-fx-background-color: FFF; -fx-border-color: #161616;" styleClass="button2" stylesheets="@../css/fullpackstyling2.css">
@@ -91,7 +92,6 @@
                         <TableColumn fx:id="col_nom" prefWidth="70.0" text="nom" />
                         <TableColumn fx:id="col_prenom" prefWidth="66.0" text="prenom" />
                         <TableColumn fx:id="col_tel" prefWidth="77.0" text="tel" />
-                        <TableColumn fx:id="col_id" prefWidth="57.0" text="#" />
                         <TableColumn fx:id="col_diet" prefWidth="57.0" text="diet " />
                         <TableColumn fx:id="col_salary" prefWidth="57.0" text="salary" />
                         <TableColumn fx:id="col_note" prefWidth="57.0" text="note" />

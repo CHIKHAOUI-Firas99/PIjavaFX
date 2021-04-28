@@ -40,7 +40,7 @@ import org.controlsfx.control.textfield.TextFields;
 /**
  * FXML Controller class
  *
- * @author Aymen
+ * @author Aziz
  */
 public class homeController implements Initializable {
 
@@ -72,8 +72,7 @@ public class homeController implements Initializable {
     private TableColumn<User, String> col_prenom;
     @FXML
     private TableColumn<User, Integer> col_tel;
-    @FXML
-    private TableColumn<User, Integer> col_id;
+
     @FXML
     private TextField txt_diet;
     @FXML
@@ -135,39 +134,39 @@ public class homeController implements Initializable {
     private void Ajouter(ActionEvent event) throws SQLException {
          if (txt_diet.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","diet",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","champ diet vide",AlertDialog.image_cross);
 
         }
          else if (txt_diet.getText().matches("^[0-9]+$")) {
-            AlertDialog.showNotification("Erreur txt_diet !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
+            AlertDialog.showNotification("Erreur Champ diet !", "il faut saisir des caracteres  !", AlertDialog.image_cross);
         }
         else  if (txt_note.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","note",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","champ note vide ",AlertDialog.image_cross);
 
         }
          else if (txt_note.getText().matches("^[a-zA-Z]+$")) {
             AlertDialog.showNotification("Erreur ", "note incorrect", AlertDialog.image_cross);
         } else if (Integer.valueOf(txt_note.getText()) <= 0) {
-            AlertDialog.showNotification("Error !", "Champ de note", AlertDialog.image_cross);
+            AlertDialog.showNotification("Error !", "Champ de note incorrect", AlertDialog.image_cross);
         }
         else  if (txt_salary.getText().equals(""))
         {
-               AlertDialog.showNotification("Error !","salary",AlertDialog.image_cross);
+               AlertDialog.showNotification("Error !","champ salary vide ",AlertDialog.image_cross);
 
         }
          else if (txt_salary.getText().matches("^[a-zA-Z]+$")) {
             AlertDialog.showNotification("Erreur!", "salary incorrect", AlertDialog.image_cross);
         }
         else if (Double.valueOf(txt_salary.getText()) <= 0) {
-            AlertDialog.showNotification("Error !", "Champ de salary", AlertDialog.image_cross);
+            AlertDialog.showNotification("Error !", "Champ de salary incorrect", AlertDialog.image_cross);
         } 
         else
         {
             System.out.println(user.getRoles());  
             if (user.getRoles().equals("[\"ROLE_NUTRITIONIST\"]"))
             {
-                 AlertDialog.showNotification("Error", "Deja Noutrist", AlertDialog.image_cross);
+                 AlertDialog.showNotification("Error", "Deja Nutrionist", AlertDialog.image_cross);
  
   
             }
@@ -184,7 +183,7 @@ public class homeController implements Initializable {
                      u.setDiet(txt_diet.getText());
                 service_nutrist.Ajouter(u);
                 
-               AlertDialog.showNotification("Modification ","Nutrisoniste",AlertDialog.image_checked);
+               AlertDialog.showNotification("Modification ","Nutrisioniste",AlertDialog.image_checked);
      
         Nombre_User_Nutriste.setText(String.valueOf(service.nombre_user()));
      try {
@@ -210,7 +209,7 @@ public class homeController implements Initializable {
     }
        public void refreche() throws SQLException {
      
-        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+
         col_email.setCellValueFactory(new PropertyValueFactory<>("email"));
         col_roles.setCellValueFactory(new PropertyValueFactory<>("roles"));
         col_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -234,7 +233,7 @@ public class homeController implements Initializable {
             } else {
 
                 try {
-                         col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                    
         col_email.setCellValueFactory(new PropertyValueFactory<>("email"));
         col_roles.setCellValueFactory(new PropertyValueFactory<>("roles"));
         col_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));

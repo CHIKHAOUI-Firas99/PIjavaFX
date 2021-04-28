@@ -91,7 +91,6 @@
                         <TableColumn fx:id="col_nom" prefWidth="70.0" text="nom" />
                         <TableColumn fx:id="col_prenom" prefWidth="66.0" text="prenom" />
                         <TableColumn fx:id="col_tel" prefWidth="77.0" text="tel" />
-                        <TableColumn fx:id="col_id" prefWidth="57.0" text="#" />
                     </columns>
                   </TableView>
                   <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="752.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">

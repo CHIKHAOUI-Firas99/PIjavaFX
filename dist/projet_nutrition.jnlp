@@ -13,7 +13,7 @@
     <jar href="lib\jBCrypt-0.4.1.jar" size="17570" download="eager" />
     <jar href="lib\jbcrypt-0.3m.jar" size="17750" download="eager" />
     <jar href="lib\mysql-connector-java-8.0.19.jar" size="2356711" download="eager" />
-    <jar href="projet_nutrition.jar" size="88090" download="eager" />
+    <jar href="projet_nutrition.jar" size="91765" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="projet_nutrition" >
     <param name="requiredFXVersion" value="8.0+"/>

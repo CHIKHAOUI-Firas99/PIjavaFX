@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Aymen
+ * @author Aziz
  */
 public class Front_user_programCrontroller implements Initializable {
 
@@ -39,8 +39,7 @@ public class Front_user_programCrontroller implements Initializable {
     private Pane pnl_Home_Sites;
     @FXML
     private TableView<programmenutrition> tabview;
-    @FXML
-    private TableColumn<programmenutrition, Integer> col_id;
+
     @FXML
     private TableColumn<programmenutrition, Integer> col_user_id;
     @FXML
@@ -110,7 +109,7 @@ public class Front_user_programCrontroller implements Initializable {
   
        public void refreche() throws SQLException {
 
-        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+      
         col_user_id.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         col_info_user_nutrition_id.setCellValueFactory(new PropertyValueFactory<>("info_user_nutrition_id"));
         col_repas1.setCellValueFactory(new PropertyValueFactory<>("repas1"));
@@ -121,7 +120,7 @@ public class Front_user_programCrontroller implements Initializable {
         col_duree.setCellValueFactory(new PropertyValueFactory<>("duree"));   
         col_jourrepot.setCellValueFactory(new PropertyValueFactory<>("jourrepot"));   
          tabview.getItems().clear();       
-                  // f oudh 5 tbdlha id ta user
+                  // f oudh 5 nbdlha id ta user
         tabview.setItems(service.Affichertout_user(5));
        
     }

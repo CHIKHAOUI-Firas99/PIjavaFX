@@ -39,7 +39,7 @@ import javafx.util.converter.IntegerStringConverter;
 /**
  * FXML Controller class
  *
- * @author Aymen
+ * @author Aziz
  */
 public class home_nutritionistController implements Initializable {
 
@@ -71,8 +71,7 @@ public class home_nutritionistController implements Initializable {
     private TableColumn<nutritionist, String> col_prenom;
     @FXML
     private TableColumn<nutritionist, Integer> col_tel;
-    @FXML
-    private TableColumn<nutritionist, Integer> col_id;
+
     @FXML
     private TableColumn<nutritionist, String> col_diet;
     @FXML
@@ -83,6 +82,8 @@ public class home_nutritionistController implements Initializable {
     nutritionist_Service service = new nutritionist_Service();
     User_Service service_user = new User_Service();
         private TableColumn<nutritionist, String> col_btnDelet;
+    @FXML
+    private Button Stat;
     /**
      * Initializes the controller class.
      */
@@ -173,7 +174,7 @@ public class home_nutritionistController implements Initializable {
     }
     public void refreche() throws SQLException {
      
-        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+    
         col_email.setCellValueFactory(new PropertyValueFactory<>("email"));
         col_roles.setCellValueFactory(new PropertyValueFactory<>("roles"));
         col_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -204,7 +205,7 @@ public class home_nutritionistController implements Initializable {
             } else {
 
                 try {
-                         col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+                      
         col_email.setCellValueFactory(new PropertyValueFactory<>("email"));
         col_roles.setCellValueFactory(new PropertyValueFactory<>("roles"));
         col_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -257,6 +258,21 @@ public class home_nutritionistController implements Initializable {
                 
                 
                 
+    }
+
+    @FXML
+    private void faire_stat(ActionEvent event) {
+           Scene scene;
+        Stage stage = new Stage();
+        try {
+
+            scene = new Scene(FXMLLoader.load(getClass().getResource("/GUI/Statistique.fxml")));
+            stage.setScene(scene);
+            stage.setTitle("Statistique");
+            stage.show();
+
+        } catch (IOException ex) {
+          }
     }
 
 }

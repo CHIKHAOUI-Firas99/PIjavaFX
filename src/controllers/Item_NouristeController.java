@@ -32,7 +32,7 @@ import org.controlsfx.control.Rating;
 /**
  * FXML Controller class
  *
- * @author Aymen
+ * @author Aziz
  */
 public class Item_NouristeController implements Initializable {
 
