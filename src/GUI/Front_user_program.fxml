@@ -20,9 +20,9 @@
                <children>
                   <Pane fx:id="pnl_Home_Sites" prefHeight="616.0" prefWidth="919.0" style="-fx-background-color: fff;">
                      <children>
-                        <AnchorPane layoutX="33.0" layoutY="62.0" prefHeight="531.0" prefWidth="886.0" style="-fx-background-color: fff; -fx-background-radius: 10;" stylesheets="@../css/fullpackstyling2.css">
+                        <AnchorPane layoutY="77.0" prefHeight="494.0" prefWidth="886.0" style="-fx-background-color: fff; -fx-background-radius: 10;" stylesheets="@../css/fullpackstyling2.css">
                            <children>
-                              <TableView fx:id="tabview" layoutY="75.0" prefHeight="414.0" prefWidth="894.0" style="-fx-background-color: FFF; -fx-border-color: #161616;" styleClass="button2" stylesheets="@../css/fullpackstyling2.css">
+                              <TableView fx:id="tabview" layoutX="18.0" layoutY="40.0" prefHeight="414.0" prefWidth="850.0" style="-fx-background-color: FFF; -fx-border-color: #161616;" styleClass="button2" stylesheets="@../css/fullpackstyling2.css">
                                  <columns>
                                     <TableColumn fx:id="col_user_id" prefWidth="52.0" text="user id" />
                                     <TableColumn fx:id="col_info_user_nutrition_id" prefWidth="83.0" text="info_user_nutrition_id" />
@@ -42,6 +42,7 @@
                               <Font name="Montserrat Medium" size="26.0" />
                            </font>
                         </Label>
+                        <Button layoutX="427.0" layoutY="571.0" mnemonicParsing="false" onAction="#doTakeScreenShot" text="Capture" />
                      </children>
                   </Pane>
                </children>

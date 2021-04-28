@@ -5,14 +5,22 @@
  */
 package controllers;
 
+import Alert.AlertDialog;
 import Service.programmenutrition_Service;
 import entites.programmenutrition;
+import java.awt.AWTException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,9 +32,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
+
 
 /**
  * FXML Controller class
@@ -123,5 +134,20 @@ public class Front_user_programCrontroller implements Initializable {
                   // f oudh 5 nbdlha id ta user
         tabview.setItems(service.Affichertout_user(5));
        
+    }
+
+    @FXML
+    private void doTakeScreenShot(ActionEvent event) {
+        try {
+            Robot robot = new Robot();
+            Rectangle rectangle = new Rectangle(555,267,850,405);
+            BufferedImage image = robot.createScreenCapture(rectangle);
+            Image myImage = SwingFXUtils.toFXImage(image, null);
+            ImageIO.write(image, "jpg", new File("Screen.jpg"));
+                        AlertDialog.showNotification("Screen effectué", "Screen effectué avec succées", AlertDialog.image_checked);
+
+                    } catch (Exception ex) {
+            Logger.getLogger(Front_user_programCrontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

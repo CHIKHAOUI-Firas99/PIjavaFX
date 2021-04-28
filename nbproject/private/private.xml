@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Aziz/OneDrive/Desktop/projet_nutrition/src/controllers/Item_NouristeController.java</file>
             <file>file:/C:/Users/Aziz/OneDrive/Desktop/projet_nutrition/src/GUI/main.java</file>
-            <file>file:/C:/Users/Aziz/OneDrive/Desktop/projet_nutrition/src/Service/User_Service.java</file>
-            <file>file:/C:/Users/Aziz/OneDrive/Desktop/projet_nutrition/src/controllers/homeController.java</file>
             <file>file:/C:/Users/Aziz/OneDrive/Desktop/projet_nutrition/src/controllers/Partie_nutritionist_programController.java</file>
-            <file>file:/C:/Users/Aziz/OneDrive/Desktop/projet_nutrition/src/Service/programmenutrition_Service.java</file>
+            <file>file:/C:/Users/Aziz/OneDrive/Desktop/projet_nutrition/src/controllers/Front_user_programCrontroller.java</file>
         </group>
     </open-files>
 </project-private>

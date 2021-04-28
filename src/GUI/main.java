@@ -23,9 +23,9 @@ public class main extends Application {
       // partie admin  
 //Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
   // partie nutrisionnistte
-   Parent root = FXMLLoader.load(getClass().getResource("Partie_nutritionist.fxml"));
+   //Parent root = FXMLLoader.load(getClass().getResource("Partie_nutritionist.fxml"));
      // partie client
- // Parent root = FXMLLoader.load(getClass().getResource("Front.fxml"));
+ Parent root = FXMLLoader.load(getClass().getResource("Front.fxml"));
         primaryStage.setScene(new Scene(root));
         //set stage borderless
         primaryStage.initStyle(StageStyle.TRANSPARENT);
