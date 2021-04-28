@@ -38,8 +38,12 @@ public class AccueilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         User user = UserService.getCurrentUser();
-        coachName.setText("Bienvenue coach "+user.getNom());
-
+        if(user.getRoles().contains("[]")){
+        coachName.setText("Bienvenue cher abonné " +user.getNom());
+        }
+        else if (user.getRoles().contains("[\"ROLE_COACH\"]")){
+        coachName.setText("Bienvenue Coach "+user.getNom());
+    }
         
 
         // TODO

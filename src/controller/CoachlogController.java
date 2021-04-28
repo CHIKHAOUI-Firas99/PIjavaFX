@@ -128,7 +128,7 @@ public class CoachlogController implements Initializable {
     public void md_profile(ActionEvent event) throws IOException{
         User user = UserService.getCurrentUser();
         if(user.getRoles().contains("[]")){
-        AlertDialog.showNotification("Cher Abonné","Seulement votre coach peut ajouter un entrainnement ", AlertDialog.image_cross);
+        AlertDialog.showNotification("Cher Abonné","Seulement votre coach peut modifier le profile ", AlertDialog.image_cross);
         }
         else{
               Parent root = FXMLLoader.load(getClass().getResource("/GUI/ProfileEdit.fxml")); 
@@ -163,7 +163,7 @@ public class CoachlogController implements Initializable {
         Desktop desktop = java.awt.Desktop.getDesktop();
         URI oURL;
         try {
-        oURL = new URI(coach.insta);
+        oURL = new URI(coach.gmail);
         desktop.browse(oURL);
         } catch (URISyntaxException ex) {
             AlertDialog.showErrorMessage(ex);
