@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="398.0" style="-fx-background-color: #232323;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MusicController">
+<AnchorPane id="AnchorPane" prefHeight="412.0" prefWidth="398.0" style="-fx-background-color: #232323;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MusicController">
    <children>
       <ImageView fitHeight="49.0" fitWidth="137.0" layoutX="14.0" layoutY="21.0">
          <image>
@@ -21,6 +21,10 @@
          </font>
       </Label>
       <Button fx:id="music1" layoutX="63.0" layoutY="119.0" mnemonicParsing="false" onAction="#music1" prefHeight="25.0" prefWidth="285.0" text="Music 1" />
+      <Button fx:id="music2" layoutX="63.0" layoutY="191.0" mnemonicParsing="false" onAction="#music2" prefHeight="25.0" prefWidth="285.0" text="Music 2" />
+      <Button fx:id="music3" layoutX="63.0" layoutY="262.0" mnemonicParsing="false" onAction="#music3" prefHeight="25.0" prefWidth="285.0" text="Music 3" />
+      <Button fx:id="music4" layoutX="63.0" layoutY="332.0" mnemonicParsing="false" onAction="#music4" prefHeight="25.0" prefWidth="285.0" text="Music 4" />
+      <Button fx:id="Stop" layoutX="341.0" layoutY="373.0" mnemonicParsing="false" onAction="#Stop" prefHeight="25.0" prefWidth="43.0" style="-fx-background-color: RED;" text="Stop" />
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />

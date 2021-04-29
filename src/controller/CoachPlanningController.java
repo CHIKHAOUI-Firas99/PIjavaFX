@@ -1157,10 +1157,11 @@ public class CoachPlanningController implements Initializable {
               stage.show();
     }
         public void meet1(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));
+                        
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 8 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1171,10 +1172,10 @@ public class CoachPlanningController implements Initializable {
            }
 
         public void meet11(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-           User user = UserService.getCurrentUser();
+UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));            
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 12 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1184,10 +1185,10 @@ public class CoachPlanningController implements Initializable {
             }
         }
         public void meet12(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));           
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 16 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1198,10 +1199,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet13(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Lundi") && e.get(j).heure == 20 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1211,10 +1212,10 @@ public class CoachPlanningController implements Initializable {
             }
         }
         public void meet14(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-                    User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 8 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1223,10 +1224,10 @@ public class CoachPlanningController implements Initializable {
             }
             }}
         public void meet15(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-                            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 12 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1236,11 +1237,10 @@ public class CoachPlanningController implements Initializable {
            }
         }
         public void meet16(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-        
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 16 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1251,10 +1251,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet17(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-                    User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Mardi") && e.get(j).heure == 20 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1264,10 +1264,10 @@ public class CoachPlanningController implements Initializable {
            }
         }
         public void meet18(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-                    User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 8 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1278,10 +1278,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet19(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-                            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 12 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1291,10 +1291,10 @@ public class CoachPlanningController implements Initializable {
            }
         }
         public void meet110(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 16 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1305,10 +1305,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet111(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Mercredi") && e.get(j).heure == 20 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1319,10 +1319,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet112(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 8 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1334,10 +1334,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet113(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 12 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1348,10 +1348,10 @@ public class CoachPlanningController implements Initializable {
         }
         }
         public void meet114(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 16 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1362,10 +1362,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet115(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Jeudi") && e.get(j).heure == 20 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1375,10 +1375,10 @@ public class CoachPlanningController implements Initializable {
         }
         }
         public void meet116(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 8 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1389,10 +1389,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet117(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 12 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1403,10 +1403,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet118(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 16 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1417,10 +1417,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet119(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-                    User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Vendredi") && e.get(j).heure == 20 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1431,10 +1431,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet120(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 8 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1445,10 +1445,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet121(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 12 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1460,10 +1460,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet122(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 16 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1474,10 +1474,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet123(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Samedi") && e.get(j).heure == 20 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1490,10 +1490,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet124(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 8 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1503,10 +1503,10 @@ public class CoachPlanningController implements Initializable {
         }          
         }
         public void meet125(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 12 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1517,10 +1517,10 @@ public class CoachPlanningController implements Initializable {
         
         }
         public void meet126(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-            User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 16 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();
@@ -1530,10 +1530,10 @@ public class CoachPlanningController implements Initializable {
         }            
         }
         public void meet127(ActionEvent event) throws IOException, SQLException, URISyntaxException{
-                    User user = UserService.getCurrentUser();
+            UserService srvUser = new UserService();
             EntrainementService es = new EntrainementService();
             CoachService CoS = new CoachService();
-            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(user.getId()));            
+            List<Entrainement> e = es.getEntrainementByCoachId(CoS.getcoachidbyuserid(srvUser.coachidabb(srvUser.getCurrentUser().getId())));          
             for(int j=0; j<e.size(); j++){
             if(e.get(j).jour.equals("Dimanche") && e.get(j).heure == 20 ){  
             Desktop desktop = java.awt.Desktop.getDesktop();

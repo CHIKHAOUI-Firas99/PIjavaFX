@@ -36,7 +36,7 @@
       </Pane>
       <Button fx:id="image" layoutX="193.0" layoutY="501.0" mnemonicParsing="false" onAction="#imageAction" prefHeight="30.0" prefWidth="185.0" style="-fx-background-color: #151515;" text="choisir votre image" textFill="WHITE" />
       <ImageView fx:id="imageshow" fitHeight="274.0" fitWidth="200.0" layoutX="186.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="path" layoutX="308.0" layoutY="148.0" prefHeight="25.0" prefWidth="629.0">
+      <TextField fx:id="path" layoutX="937.0" layoutY="148.0" prefHeight="25.0" prefWidth="0.0" style="-fx-background-color: #232323;">
          <font>
             <Font size="1.0" />
          </font>
