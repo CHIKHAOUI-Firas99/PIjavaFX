@@ -20,10 +20,10 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Button fx:id="music1" layoutX="63.0" layoutY="119.0" mnemonicParsing="false" onAction="#music1" prefHeight="25.0" prefWidth="285.0" text="Music 1" />
-      <Button fx:id="music2" layoutX="63.0" layoutY="191.0" mnemonicParsing="false" onAction="#music2" prefHeight="25.0" prefWidth="285.0" text="Music 2" />
-      <Button fx:id="music3" layoutX="63.0" layoutY="262.0" mnemonicParsing="false" onAction="#music3" prefHeight="25.0" prefWidth="285.0" text="Music 3" />
-      <Button fx:id="music4" layoutX="63.0" layoutY="332.0" mnemonicParsing="false" onAction="#music4" prefHeight="25.0" prefWidth="285.0" text="Music 4" />
+      <Button fx:id="music1" layoutX="63.0" layoutY="119.0" mnemonicParsing="false" onAction="#music1" prefHeight="25.0" prefWidth="285.0" style="-fx-background-color: #151515;" text="Music 1" textFill="WHITE" />
+      <Button fx:id="music2" layoutX="63.0" layoutY="191.0" mnemonicParsing="false" onAction="#music2" prefHeight="25.0" prefWidth="285.0" style="-fx-background-color: #151515;" text="Music 2" textFill="WHITE" />
+      <Button fx:id="music3" layoutX="63.0" layoutY="262.0" mnemonicParsing="false" onAction="#music3" prefHeight="25.0" prefWidth="285.0" style="-fx-background-color: #151515;" text="Music 3" textFill="WHITE" />
+      <Button fx:id="music4" layoutX="63.0" layoutY="332.0" mnemonicParsing="false" onAction="#music4" prefHeight="25.0" prefWidth="285.0" style="-fx-background-color: #151515;" text="Music 4" textFill="WHITE" />
       <Button fx:id="Stop" layoutX="341.0" layoutY="373.0" mnemonicParsing="false" onAction="#Stop" prefHeight="25.0" prefWidth="43.0" style="-fx-background-color: RED;" text="Stop" />
    </children>
    <cursor>

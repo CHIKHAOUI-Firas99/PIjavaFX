@@ -56,7 +56,7 @@ public class JavaMailUtil {
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("Entrainement");
-            message.setText("Votre Coach a modifier le palininng d'entrainement");
+            message.setText("Votre Coach a modifier le planinng d'entrainement");
             return message;
         } catch (Exception ex) {
             Logger.getLogger(JavaMailUtil.class.getName()).log(Level.SEVERE, null, ex);

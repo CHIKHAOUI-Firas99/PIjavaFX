@@ -62,6 +62,7 @@ public class ConnectionController implements Initializable {
     }
     
     else if(username.getText().toString() != "" || password.getText().toString() != "" ){
+           try{
             ls.check(userName, passWord);
             if (srvUser.getCurrentUser().getRoles().contains("[\"ROLE_COACH\"]") || srvUser.getCurrentUser().getRoles().contains("[]"))       
             {Parent root = FXMLLoader.load(getClass().getResource("/GUI/Accueil.fxml")); 
@@ -69,9 +70,12 @@ public class ConnectionController implements Initializable {
               Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
               stage.setScene(scene);
               stage.show();       
-      System.out.println(srvUser.coachidabb(srvUser.getCurrentUser().getId()));}
-    
-    }
+              System.out.println(srvUser.coachidabb(srvUser.getCurrentUser().getId()));}
+            }
+           catch(Exception ex){
+               AlertDialog.showErrorMessage(ex);         
+            }
+            }
     }
     }
 

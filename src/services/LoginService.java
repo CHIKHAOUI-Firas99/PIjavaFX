@@ -37,10 +37,11 @@ public class LoginService {
                 else if(p.getRoles().toLowerCase().contains("[]")){
                     System.out.println("ok");
                 }
-                
+        
             }
-        }
+       
      }
+}
                     
     
     
